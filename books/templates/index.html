@@ -1,0 +1,216 @@
+{% extends 'base.html' %}
+{% block content %}
+<!-- Add FontAwesome CSS -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Add AOS CSS -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+  rel="stylesheet"
+/>
+
+<style>
+  /* Light & Dark mode variables */
+  :root {
+    --bg-light: #f8f9fa;
+    --text-light: #212529;
+    --bg-dark: #121212;
+    --text-dark: #e0e0e0;
+    --primary-color: #0ff;
+  }
+
+  body.light-mode {
+    background-color: var(--bg-light);
+    color: var(--text-light);
+    transition: background-color 0.5s, color 0.5s;
+  }
+
+  body.dark-mode {
+    background-color: var(--bg-dark);
+    color: var(--text-dark);
+    transition: background-color 0.5s, color 0.5s;
+  }
+
+  .btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    color: #000;
+    font-weight: 600;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .btn-primary:hover {
+    background-color: #00e5ff;
+    color: #000;
+  }
+
+  /* Dark mode toggle button */
+  #darkModeToggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--primary-color);
+    border: none;
+    color: #000;
+    padding: 10px 15px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 700;
+    box-shadow:
+      0 0 8px var(--primary-color),
+      0 0 15px var(--primary-color);
+    z-index: 1000;
+    transition: background-color 0.3s;
+  }
+
+  #darkModeToggle:hover {
+    background: #00e5ff;
+  }
+
+  /* Services Section */
+  .services-section {
+    padding: 60px 20px;
+    max-width: 1000px;
+    margin: 60px auto 100px;
+  }
+
+  .services-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+    justify-content: center;
+  }
+
+  .service-card {
+    background-color: var(--bg-light);
+    border-radius: 15px;
+    padding: 30px 25px;
+    flex: 1 1 260px;
+    max-width: 280px;
+    box-shadow:
+      0 0 12px var(--primary-color),
+      0 0 20px var(--primary-color);
+    text-align: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    color: var(--text-light);
+  }
+
+  body.dark-mode .service-card {
+    background-color: #222;
+    color: var(--text-dark);
+    box-shadow:
+      0 0 12px var(--primary-color),
+      0 0 25px var(--primary-color);
+  }
+
+  .service-card:hover {
+    transform: scale(1.1);
+    box-shadow:
+      0 0 25px var(--primary-color),
+      0 0 50px var(--primary-color);
+  }
+
+  .service-icon {
+    font-size: 48px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+  }
+
+  /* Heading styles */
+  h1.display-4 {
+    font-weight: 900;
+    margin-bottom: 10px;
+  }
+
+  h2 {
+    font-weight: 800;
+    color: var(--primary-color);
+    margin-bottom: 50px;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .services-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+</style>
+
+<button id="darkModeToggle" aria-label="Toggle Dark Mode">
+  <i class="fas fa-moon"></i>
+</button>
+
+<div class="text-center">
+  <h1 class="display-4" data-aos="fade-down" data-aos-duration="800">
+    Welcome to the E-Library
+  </h1>
+  <p class="lead" data-aos="fade-up" data-aos-duration="800" data-aos-delay="200">
+    Access a world of books online!
+  </p>
+  <a href="{% url 'book_list' %}" class="btn btn-primary" data-aos="zoom-in" data-aos-duration="800" data-aos-delay="400">
+    Browse Books
+  </a>
+</div>
+
+<!-- Our Services Section -->
+<section class="services-section" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="600">
+  <h2 class="text-center">Our Services</h2>
+  <div class="services-container">
+    <div class="service-card" data-aos="flip-left" data-aos-delay="700">
+      <div class="service-icon"><i class="fas fa-book"></i></div>
+      <h4>Vast Book Collection</h4>
+      <p>Explore thousands of books from various genres and categories.</p>
+    </div>
+    <div class="service-card" data-aos="flip-left" data-aos-delay="850">
+      <div class="service-icon"><i class="fas fa-search"></i></div>
+      <h4>Advanced Search</h4>
+      <p>Find your favorite books easily with powerful search and filters.</p>
+    </div>
+    <div class="service-card" data-aos="flip-left" data-aos-delay="1000">
+      <div class="service-icon"><i class="fas fa-download"></i></div>
+      <h4>Easy Borrowing</h4>
+      <p>Borrow books online and manage your reading list seamlessly.</p>
+    </div>
+    <div class="service-card" data-aos="flip-left" data-aos-delay="1150">
+      <div class="service-icon"><i class="fas fa-moon"></i></div>
+      <h4>Dark Mode</h4>
+      <p>Enjoy reading with a comfortable dark mode interface option.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AOS JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init();
+
+  // Dark mode toggle logic
+  const toggleBtn = document.getElementById('darkModeToggle');
+  const body = document.body;
+
+  // Check saved preference in localStorage
+  if (localStorage.getItem('theme') === 'dark') {
+    body.classList.add('dark-mode');
+    toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+  } else {
+    body.classList.add('light-mode');
+    toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    if (body.classList.contains('dark-mode')) {
+      body.classList.replace('dark-mode', 'light-mode');
+      toggleBtn.innerHTML = '<i class="fas fa-moon"></i>';
+      localStorage.setItem('theme', 'light');
+    } else {
+      body.classList.replace('light-mode', 'dark-mode');
+      toggleBtn.innerHTML = '<i class="fas fa-sun"></i>';
+      localStorage.setItem('theme', 'dark');
+    }
+  });
+</script>
+
+{% endblock %}

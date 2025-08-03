@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container my-5 text-white">
+  <div class="card book-detail-card shadow-lg border-0 rounded-4 p-4">
+    <div class="row align-items-center">
+      <div class="col-md-5 text-center mb-3 mb-md-0">
+        <div class="book-3d-flip">
+          <img src="{{ book.image.url }}" alt="{{ book.title }}" class="img-fluid rounded book-detail-img" />
+        </div>
+      </div>
+      <div class="col-md-7">
+        <h2 class="mb-3">{{ book.title }}</h2>
+        <h5 class="text-primary mb-3">by {{ book.author }}</h5>
+        <p class="lead">{{ book.description }}</p>
+        
+        <div class="my-3">
+          {% if book.is_available %}
+            <a href="{% url 'borrow_book' book.id %}" class="btn btn-success px-4">Borrow Book</a>
+          {% else %}
+            <span class="badge bg-danger p-3">Currently Unavailable</span>
+          {% endif %}
+        </div>
+
+        <a href="{% url 'book_list' %}" class="btn btn-outline-light mt-3">← Back to Catalog</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

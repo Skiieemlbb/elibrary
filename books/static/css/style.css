@@ -1,0 +1,122 @@
+body.dark-mode {
+  background-color: #121212;
+  color: #eee;
+}
+.book-cover {
+  width: 200px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 0 10px #333;
+}
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0,0,0,0.5); /* Dark overlay */
+  z-index: -1;
+}
+body {
+  background-image: url('../images/background.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+footer {
+  font-size: 14px;
+  letter-spacing: 1px;
+  background-color: #111;
+  color: #aaa;
+  border-top: 1px solid #444;
+}
+.book-card-wrapper {
+  background-color: #1e1e2f;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  animation: fadeInUp 0.5s ease-in-out;
+}
+
+.book-card-wrapper:hover {
+  transform: translateY(-5px);
+  box-shadow: rgba(0, 255, 255, 0.4) 0px 22px 70px 8px;
+}
+
+.book-image-box {
+  width: 100%;
+  height: 230px;
+  overflow: hidden;
+}
+
+.book-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.book-title {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #00ffee;
+}
+
+.book-author {
+  font-size: 0.85rem;
+  color: #aaa;
+  font-style: italic;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.book-detail-card {
+  background: linear-gradient(135deg, #1e1e2f, #111);
+  transition: transform 0.3s ease-in-out;
+}
+
+.book-detail-card:hover {
+  transform: scale(1.01);
+}
+
+.book-detail-img {
+  max-height: 400px;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.book-detail-img:hover {
+  transform: rotateY(10deg) scale(1.02);
+}
+
+/* Optional cool shadow */
+.book-3d-flip {
+  box-shadow: rgba(0, 0, 0, 0.6) 0px 20px 60px 5px;
+  border-radius: 10px;
+  padding: 10px;
+  background-color: #222;
+}
+body.light-mode {
+  background: #f4f4f4;
+  color: #111;
+}
+body.light-mode .book-detail-card {
+  background: #fff;
+  color: #222;
+}

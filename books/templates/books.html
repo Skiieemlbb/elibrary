@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2 class="text-center my-4">📚 Book Catalog</h2>
+
+<!-- 🔍 Advanced Search Bar -->
+<div class="container mb-4 animate-fade">
+  <form method="GET" class="d-flex justify-content-center align-items-center gap-3">
+    <input type="text" name="q" placeholder="Search by title or author" class="form-control w-50 shadow-sm custom-search" value="{{ request.GET.q }}">
+    <button type="submit" class="btn btn-outline-primary">🔍 Search</button>
+  </form>
+</div>
+
+<!-- 📚 Book Cards -->
+<div class="container">
+  <div class="row">
+    {% for book in books %}
+    <div class="col-6 col-md-4 col-lg-3 mb-5">
+      <a href="{% url 'book_detail' book.id %}" class="text-decoration-none text-white">
+        <div class="book-card-wrapper shadow-box h-100">
+          <div class="book-image-box">
+            <img src="{{ book.image.url }}" alt="{{ book.title }}" class="book-cover w-100" />
+          </div>
+          <div class="book-info-box text-center p-2">
+            <h5 class="book-title mb-1">{{ book.title }}</h5>
+            <p class="book-author">{{ book.author }}</p>
+          </div>
+        </div>
+      </a>
+      <div class="text-center mt-2 mb-2">
+        {% if book.is_available %}
+          <a href="{% url 'borrow_book' book.id %}" class="btn btn-primary btn-sm w-75">Borrow</a>
+        {% else %}
+          <span class="badge bg-danger w-75 py-2">Not Available</span>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %}
